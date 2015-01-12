@@ -304,18 +304,18 @@ void test_legendre_p_zeros()
         zeros = legendre_p_zeros<Real>(n);
         if (n & 1)
         {
-            BOOST_CHECK(zeros.size() == (n-1)/2 +1);
+            BOOST_CHECK(zeros.size() == static_cast<std::size_t>((n-1)/2 +1));
             BOOST_CHECK_SMALL(zeros[0], tol);
         }
         else
         {
             // Zero is not a zero of the odd Legendre polynomials
-            BOOST_CHECK(zeros.size() == n/2);
+            BOOST_CHECK(zeros.size() == static_cast<std::size_t>(n/2));
             BOOST_CHECK(zeros[0] > 0);
             BOOST_CHECK_SMALL(legendre_p(n, zeros[0]), 550*tol);
         }
         Real previous_zero = zeros[0];
-        for (int k = 1; k < zeros.size(); ++k)
+        for (std::size_t k = 1; k < zeros.size(); ++k)
         {
             Real next_zero = zeros[k];
             BOOST_CHECK(next_zero > previous_zero);

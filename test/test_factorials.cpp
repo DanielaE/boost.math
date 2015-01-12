@@ -8,6 +8,7 @@
 #ifdef _MSC_VER
 #  pragma warning(disable: 4127) // conditional expression is constant.
 #  pragma warning(disable: 4245) // int/unsigned int conversion
+#  pragma warning(disable: 4756) // overflow in constant arithmetic
 #endif
 
 // Return infinities not exceptions:

@@ -15,6 +15,11 @@
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/policies/error_handling.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost{ namespace math{
 
 template <class T, class Policy>
@@ -75,6 +80,9 @@ inline T binomial_coefficient(unsigned n, unsigned k)
 } // namespace math
 } // namespace boost
 
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SF_BINOMIAL_HPP
 

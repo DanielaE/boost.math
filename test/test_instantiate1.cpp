@@ -7,6 +7,10 @@
 
 #include "compile_test/instantiate.hpp"
 
+#ifdef BOOST_MSVC
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 extern void other_test();
 
 int main(int argc, char* [])

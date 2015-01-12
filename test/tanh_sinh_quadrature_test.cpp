@@ -563,7 +563,7 @@ void test_crc()
     // We also use a 2 argument functor so that 1-x is evaluated accurately:
     if (std::numeric_limits<Real>::max_exponent > std::numeric_limits<double>::max_exponent)
     {
-       for (Real p = -0.99; p < 1; p += 0.1) {
+       for (Real p = (Real)-0.99; p < 1; p += (Real)0.1) {
           auto f = [&](Real x, Real cx)->Real
           {
              //return pow(x, p) / pow(1 - x, p);
@@ -579,7 +579,7 @@ void test_crc()
     // domain (0, INF).  Internally we need to expand out the terms and evaluate using logs to avoid spurous overflow, 
     // this gives us
     // for p > 0:
-    for (Real p = 0.99; p > 0; p -= 0.1) {
+    for (Real p = (Real)0.99; p > 0; p -= (Real)0.1) {
        auto f = [&](Real x)->Real
        {
           return exp(-x * (1 - p) + p * log(-boost::math::expm1(-x)));
@@ -589,7 +589,7 @@ void test_crc()
        BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, 10 * tol);
     }
     // and for p < 1:
-    for (Real p = -0.99; p < 0; p += 0.1) {
+    for (Real p = (Real)-0.99; p < 0; p += (Real)0.1) {
        auto f = [&](Real x)->Real
        {
           return exp(-p * log(-boost::math::expm1(-x)) - (1 + p) * x);
@@ -616,7 +616,7 @@ void test_crc()
     //
     Real limit = std::numeric_limits<Real>::max_exponent > std::numeric_limits<double>::max_exponent
        ? .95f : .85f;
-    for (Real h = 0.01; h < limit; h += 0.1) {
+    for (Real h = (Real)0.01; h < limit; h += (Real)0.1) {
         auto f = [&](Real x, Real xc)->Real { return xc > 0 ? pow(1/tan(xc), h) : pow(tan(x), h); };
         Q = integrator.integrate(f, (Real) 0, half_pi<Real>(), get_convergence_tolerance<Real>(), &error, &L1);
         Q_expected = half_pi<Real>()/cos(h*half_pi<Real>());

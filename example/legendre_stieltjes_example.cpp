@@ -20,7 +20,7 @@ using boost::multiprecision::cpp_bin_float_100;
 using boost::multiprecision::cpp_dec_float_100;
 
 template<class Real>
-void gauss_kronrod_rule(size_t order)
+void gauss_kronrod_rule(unsigned order)
 {
     std::cout << std::setprecision(std::numeric_limits<Real>::digits10);
     std::cout << std::fixed;

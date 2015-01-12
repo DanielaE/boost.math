@@ -9,6 +9,8 @@
 #ifdef _MSC_VER
 #pragma once
 #pragma warning(push)
+#pragma warning(disable:4244) // narrowing conversion
+#pragma warning(disable:4305) // truncation
 #pragma warning(disable:4702) // Unreachable code (release mode only warning)
 #endif
 

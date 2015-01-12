@@ -27,6 +27,11 @@ void compile_and_link_test()
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
    check_result<long double>(boost::math::tangent_t2n<long double>(i));
 #endif
+
+#ifdef BOOST_MSVC
+#pragma warning(disable: 4244) // conversion ... to 'const float', possible loss of data
+#endif
+
 #ifdef BOOST_MATH_HAVE_CONSTEXPR_TABLES
    constexpr float ce_f = boost::math::unchecked_bernoulli_b2n<float>(2);
    constexpr float ce_d = boost::math::unchecked_bernoulli_b2n<double>(2);

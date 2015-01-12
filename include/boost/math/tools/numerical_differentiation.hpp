@@ -154,7 +154,7 @@ namespace detail {
 
       const Real eps = (numeric_limits<Real>::epsilon)();
       // Error bound ~eps^4/5
-      Real h = pow(11.25*eps, (Real)1 / (Real)5);
+      Real h = static_cast<Real>(pow(11.25*eps, (Real)1 / (Real)5));
       h = detail::make_xph_representable(x, h);
       Real ymth = f(x - 2 * h);
       Real yth = f(x + 2 * h);
@@ -223,7 +223,7 @@ namespace detail {
       // Mathematica code to get the error:
       // Series[(f[x+h]-f[x-h])*(4/5) + (1/5)*(f[x-2*h] - f[x+2*h]) + (4/105)*(f[x+3*h] - f[x-3*h]) + (1/280)*(f[x-4*h] - f[x+4*h]), {h, 0, 9}]
       // If we used Kahan summation, we could get the max error down to h^8|f^(9)(x)|/630 + |f(x)|eps/h.
-      Real h = pow(551.25*eps, (Real)1 / (Real)9);
+      Real h = static_cast<Real>(pow(551.25*eps, (Real)1 / (Real)9));
       h = detail::make_xph_representable(x, h);
 
       Real yh = f(x + h);

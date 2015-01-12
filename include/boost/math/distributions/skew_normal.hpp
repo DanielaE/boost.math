@@ -27,6 +27,11 @@
 #include <utility>
 #include <algorithm> // std::lower_bound, std::distance
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost{ namespace math{
 
   namespace detail
@@ -713,6 +718,10 @@ namespace boost{ namespace math{
 // for this distribution have been defined, in order to
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_STATS_SKEW_NORMAL_HPP
 
