@@ -7,7 +7,9 @@
 #define BOOST_MATH_SPECIAL_BETA_HPP
 
 #ifdef _MSC_VER
-#pragma once
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
 #endif
 
 #include <boost/math/special_functions/math_fwd.hpp>
@@ -1587,6 +1589,10 @@ inline typename tools::promote_args<RT1, RT2, RT3>::type
 
 #include <boost/math/special_functions/detail/ibeta_inverse.hpp>
 #include <boost/math/special_functions/detail/ibeta_inv_ab.hpp>
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_BETA_HPP
 

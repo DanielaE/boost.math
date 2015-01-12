@@ -7,7 +7,9 @@
 #define BOOST_MATH_ZETA_HPP
 
 #ifdef _MSC_VER
-#pragma once
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4305) // truncation
 #endif
 
 #include <boost/math/special_functions/math_fwd.hpp>
@@ -1085,6 +1087,10 @@ inline typename tools::promote_args<T>::type zeta(T s)
 }
 
 }} // namespaces
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_ZETA_HPP
 

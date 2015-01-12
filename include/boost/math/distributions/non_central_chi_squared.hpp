@@ -7,6 +7,11 @@
 // (See accompanying file LICENSE_1_0.txt
 // or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 #ifndef BOOST_MATH_SPECIAL_NON_CENTRAL_CHI_SQUARE_HPP
 #define BOOST_MATH_SPECIAL_NON_CENTRAL_CHI_SQUARE_HPP
 
@@ -989,6 +994,10 @@ namespace boost
 // for this distribution have been defined, in order to
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_NON_CENTRAL_CHI_SQUARE_HPP
 

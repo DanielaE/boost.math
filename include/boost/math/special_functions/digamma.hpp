@@ -7,7 +7,10 @@
 #define BOOST_MATH_SF_DIGAMMA_HPP
 
 #ifdef _MSC_VER
-#pragma once
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#  pragma warning(disable: 4305) // truncation
 #endif
 
 #include <boost/math/special_functions/math_fwd.hpp>
@@ -624,5 +627,10 @@ inline typename tools::promote_args<T>::type
 
 } // namespace math
 } // namespace boost
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
+
 #endif
 

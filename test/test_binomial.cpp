@@ -211,8 +211,8 @@ void test_spot(
    else
    {
       // Not enough information content in P for Q to be meaningful
-      RealType tol = (std::max)(2 * Q, boost::math::tools::epsilon<RealType>());
-      BOOST_CHECK(sum < tol);
+      RealType tol_ = (std::max)(2 * Q, boost::math::tools::epsilon<RealType>());
+      BOOST_CHECK(sum < tol_);
    }
 }
 
