@@ -15,6 +15,7 @@
 #  pragma warning (disable : 4244) // conversion possible loss of data.
 #  pragma warning (disable : 4996) // 'putenv': The POSIX name for this item is deprecated.
 #  pragma warning (disable : 4127) // conditional expression is constant.
+#  pragma warning (disable : 4723) // potential divide by 0.
 #endif
 
 // Default domain error policy is

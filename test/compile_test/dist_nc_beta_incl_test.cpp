@@ -17,6 +17,10 @@
 //
 #include "test_compile_result.hpp"
 
+#ifdef _MSC_VER
+#pragma warning(disable: 4702) // unreachable code
+#endif
+
 void compile_and_link_test()
 {
    TEST_DIST_FUNC(non_central_beta)
