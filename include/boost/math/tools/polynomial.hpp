@@ -288,7 +288,7 @@ public:
    explicit polynomial(const U& point)
    {
        if (point != U(0))
-          m_data.push_back(point);
+          m_data.push_back(static_cast<const T>(point));
    }
 
    // copy:

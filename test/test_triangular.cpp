@@ -13,6 +13,7 @@
 #ifdef _MSC_VER
 #  pragma warning(disable: 4127) // conditional expression is constant.
 #  pragma warning(disable: 4305) // truncation from 'long double' to 'float'
+#  pragma warning(disable: 4838) // conversion from 'long double' to 'float' requires a narrowing conversion
 #endif
 
 #include <boost/math/concepts/real_concept.hpp> // for real_concept

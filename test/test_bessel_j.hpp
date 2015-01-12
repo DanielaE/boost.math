@@ -6,6 +6,7 @@
 #ifdef _MSC_VER
 #  pragma warning(push)
 #  pragma warning(disable: 4756) // overflow in constant arithmetic
+#  pragma warning(disable: 4723) // potential divide by 0
 #endif
 
 #define BOOST_MATH_OVERFLOW_ERROR_POLICY ignore_error
