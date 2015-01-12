@@ -13,6 +13,10 @@
 //
 #include "test_compile_result.hpp"
 
+#ifdef BOOST_MSVC
+# pragma warning(disable: 4723) // potential divide by 0
+#endif
+
 void compile_and_link_test()
 {
    check_result<float>(boost::math::cyl_bessel_j<float>(f, f));

@@ -56,7 +56,6 @@ int main()
     // An eye
     // We'll start at the year 1860:
     double t0 = 1860;
-    double time_step = 10;
     std::vector<double> population{31443321,  /* 1860 */
                                    39818449,  /* 1870 */
                                    50189209,  /* 1880 */

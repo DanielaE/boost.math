@@ -13,6 +13,9 @@
 
 #ifdef _MSC_VER
 #  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#  pragma warning(disable: 4702) // unreachable code
 #endif
 
 #include <limits>
@@ -756,6 +759,10 @@ inline OutputIterator cyl_neumann_zero(T v,
 
 } // namespace math
 } // namespace boost
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_BESSEL_HPP
 

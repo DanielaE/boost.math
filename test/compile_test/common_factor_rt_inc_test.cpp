@@ -11,9 +11,10 @@
 // Note this header includes no other headers, this is
 // important if this test is to be meaningful:
 //
+inline void check_result_imp(std::pair<unsigned long, unsigned long*>, std::pair<unsigned long, unsigned long*>) {}
 #include "test_compile_result.hpp"
 
-inline void check_result_imp(std::pair<unsigned long, unsigned long*>, std::pair<unsigned long, unsigned long*>) {}
+//inline void check_result_imp(std::pair<unsigned long, unsigned long*>, std::pair<unsigned long, unsigned long*>) {}
 
 
 void compile_and_link_test()

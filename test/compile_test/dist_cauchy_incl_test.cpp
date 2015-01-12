@@ -6,6 +6,7 @@
 // Basic sanity check that header <boost/math/distributions/cauchy.hpp>
 // #includes all the files that it needs to.
 //
+
 #define BOOST_MATH_ASSERT_UNDEFINED_POLICY false
 #include <boost/math/distributions/cauchy.hpp>
 //
@@ -13,6 +14,10 @@
 // important if this test is to be meaningful:
 //
 #include "test_compile_result.hpp"
+
+#ifdef _MSC_VER
+#pragma warning(disable: 4702) // unreachable code
+#endif
 
 void compile_and_link_test()
 {

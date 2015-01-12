@@ -213,7 +213,7 @@ T cbrt_noderiv(T x)
   else
   { // (boost::is_class<T>)
     double dx = static_cast<double>(x);
-    guess = boost::math::cbrt<T>(dx); // Get guess using double.
+    guess = static_cast<T>(boost::math::cbrt<T>(static_cast<T>(dx))); // Get guess using double.
   }
   
   T factor = 2; // How big steps to take when searching.
@@ -222,6 +222,7 @@ T cbrt_noderiv(T x)
   boost::uintmax_t it = maxit; // Initally our chosen max iterations, but updated with actual.
   bool is_rising = true; // So if result if guess^3 is too low, then try increasing guess.
   int digits = std::numeric_limits<T>::digits; // Maximum possible binary digits accuracy for type T.
+  (void)digits;
   // Some fraction of digits is used to control how accurate to try to make the result.
   int get_digits = static_cast<int>(std::numeric_limits<T>::digits - 2);
 
@@ -265,7 +266,7 @@ T cbrt_deriv(T x)
      guess = ldexp(static_cast<T>(1), exponent / 3); // Rough guess is to divide the exponent by three.
   }
   else
-     guess = boost::math::cbrt(static_cast<double>(x));
+     guess = static_cast<T>(boost::math::cbrt(static_cast<double>(x)));
   T min = guess / 2; // Minimum possible value is half our guess.
   T max = 2 * guess; // Maximum possible value is twice our guess.
   const int digits = std::numeric_limits<T>::digits; // Maximum possible binary digits accuracy for type T.
@@ -310,7 +311,7 @@ T cbrt_2deriv(T x)
      guess = ldexp(static_cast<T>(1), exponent / 3); // Rough guess is to divide the exponent by three.
   }
   else
-     guess = boost::math::cbrt(static_cast<double>(x));
+     guess = static_cast<T>(boost::math::cbrt(static_cast<double>(x)));
   T min = guess / 2; // Minimum possible value is half our guess.
   T max = 2 * guess; // Maximum possible value is twice our guess.
   const int digits = std::numeric_limits<T>::digits; // Maximum possible binary digits accuracy for type T.
@@ -338,7 +339,7 @@ T cbrt_2deriv_s(T x)
      guess = ldexp(static_cast<T>(1), exponent / 3); // Rough guess is to divide the exponent by three.
   }
   else
-     guess = boost::math::cbrt(static_cast<double>(x));
+     guess = static_cast<T>(boost::math::cbrt(static_cast<double>(x)));
   T min = guess / 2; // Minimum possible value is half our guess.
   T max = 2 * guess; // Maximum possible value is twice our guess.
   const int digits = std::numeric_limits<T>::digits; // Maximum possible binary digits accuracy for type T.
@@ -450,8 +451,8 @@ int test_root(cpp_bin_float_100 big_value, cpp_bin_float_100 answer, const char*
       sum += result;
     }
     now = ti.elapsed();
-    boost:int_least64_t n = now.user;
-
+    boost::int_least64_t n = now.user;
+    (void)n;
     long time = static_cast<long>(now.user/1000); // convert nanoseconds to microseconds (assuming this is resolution).
     root_infos[type_no].times.push_back(time); // CPU time taken.
     ti.stop();

@@ -7,6 +7,12 @@
 #ifndef BOOST_MATH_AIRY_HPP
 #define BOOST_MATH_AIRY_HPP
 
+#ifdef _MSC_VER
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 #include <limits>
 #include <boost/math/special_functions/math_fwd.hpp>
 #include <boost/math/special_functions/bessel.hpp>
@@ -465,5 +471,9 @@ inline OutputIterator airy_bi_zero(
 }
 
 }} // namespaces
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_AIRY_HPP

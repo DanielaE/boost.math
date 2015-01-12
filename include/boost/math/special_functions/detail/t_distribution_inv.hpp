@@ -8,7 +8,9 @@
 #define BOOST_MATH_SF_DETAIL_INV_T_HPP
 
 #ifdef _MSC_VER
-#pragma once
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4305) // truncation
 #endif
 
 #include <boost/math/special_functions/cbrt.hpp>
@@ -542,6 +544,10 @@ inline T fast_students_t_quantile(T df, T p, const Policy& pol)
 }
 
 }}} // namespaces
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SF_DETAIL_INV_T_HPP
 

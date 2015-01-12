@@ -15,6 +15,11 @@
 #include <boost/math/tools/atomic.hpp>
 #include <boost/detail/lightweight_mutex.hpp>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4756) // overflow in constant arithmetic
+#endif
+
 namespace boost{ namespace math{ namespace quadrature { namespace detail{
 
 
@@ -472,4 +477,8 @@ void exp_sinh_detail<Real, Policy>::init(const mpl::int_<4>&)
 }
 }
 }
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
+
 #endif
