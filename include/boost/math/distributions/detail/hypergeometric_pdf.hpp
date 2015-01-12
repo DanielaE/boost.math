@@ -9,6 +9,12 @@
 #ifndef BOOST_MATH_DISTRIBUTIONS_DETAIL_HG_PDF_HPP
 #define BOOST_MATH_DISTRIBUTIONS_DETAIL_HG_PDF_HPP
 
+#ifdef _MSC_VER
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 #include <boost/math/constants/constants.hpp>
 #include <boost/math/special_functions/lanczos.hpp>
 #include <boost/math/special_functions/gamma.hpp>
@@ -483,6 +489,10 @@ inline typename tools::promote_args<T>::type
 }
 
 }}} // namespaces
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif
 

@@ -3,6 +3,11 @@
 //  Boost Software License, Version 1.0. (See accompanying file
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable: 4756) // overflow in constant arithmetic
+#endif
+
 #define BOOST_MATH_OVERFLOW_ERROR_POLICY ignore_error
 #include <boost/math/concepts/real_concept.hpp>
 #define BOOST_TEST_MAIN
@@ -219,3 +224,6 @@ void test_bessel_prime(T, const char* name)
     do_test_sph_neumann_y_prime<T>(sph_neumann_prime_data, name, "y': Random Data");
 }
 
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif

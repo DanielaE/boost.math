@@ -226,8 +226,8 @@ void test_complex_error(T)
    TEST_EXCEPTION(boost::math::policies::raise_denorm_error<T>(func, 0, T(0), throw_policy), std::underflow_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Denorm Error"));
    TEST_EXCEPTION(boost::math::policies::raise_evaluation_error(func, msg1, T(1.25), throw_policy), boost::math::evaluation_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value (1.25,0)"));
    TEST_EXCEPTION(boost::math::policies::raise_evaluation_error(func, 0, T(1.25), throw_policy), boost::math::evaluation_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Internal Evaluation Error, best value so far was (1.25,0)"));
-   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, msg1, T(1.25), T(12.34), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value (1.25,0)"));
-   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, 0, T(1.25), T(12.34), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Indeterminate result with value (1.25,0)"));
+   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, msg1, T(1.25), T(12.34f), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value (1.25,0)"));
+   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, 0, T(1.25), T(12.34f), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Indeterminate result with value (1.25,0)"));
    //
    // Now try user error handlers: these should all throw user_error():
    // - because by design these are undefined and must be defined by the user ;-)
@@ -247,7 +247,7 @@ void test_complex_error(T)
    BOOST_CHECK_EQUAL(boost::math::policies::raise_underflow_error<T>(func, msg2, ignore_policy), T(0));
    BOOST_CHECK_EQUAL(boost::math::policies::raise_denorm_error<T>(func, msg2, T(1.25), ignore_policy), T(1.25));
    BOOST_CHECK_EQUAL(boost::math::policies::raise_evaluation_error(func, msg1, T(1.25), ignore_policy), T(1.25));
-   BOOST_CHECK_EQUAL(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34), ignore_policy), T(12.34));
+   BOOST_CHECK_EQUAL(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34f), ignore_policy), T(12.34f));
 
    // Test with errno_on_error
    errno = 0;
@@ -269,7 +269,7 @@ void test_complex_error(T)
    BOOST_CHECK_EQUAL(boost::math::policies::raise_evaluation_error(func, msg1, T(1.25), errno_policy), T(1.25));
    BOOST_CHECK(errno == EDOM);
    errno = 0;
-   BOOST_CHECK(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34), errno_policy) == T(12.34));
+   BOOST_CHECK(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34f), errno_policy) == T(12.34f));
    BOOST_CHECK_EQUAL(errno, EDOM);
 }
 
@@ -294,8 +294,8 @@ void test_polynomial_error(T)
    TEST_EXCEPTION(boost::math::policies::raise_pole_error(func, 0, val, throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Evaluation of function at pole { 1, 2, 3 }"));
    TEST_EXCEPTION(boost::math::policies::raise_evaluation_error(func, msg1, val, throw_policy), boost::math::evaluation_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value { 1, 2, 3 }"));
    TEST_EXCEPTION(boost::math::policies::raise_evaluation_error(func, 0, val, throw_policy), boost::math::evaluation_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Internal Evaluation Error, best value so far was { 1, 2, 3 }"));
-   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, msg1, val, T(12.34), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value { 1, 2, 3 }"));
-   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, 0, val, T(12.34), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Indeterminate result with value { 1, 2, 3 }"));
+   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, msg1, val, T(12.34f), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Error while handling value { 1, 2, 3 }"));
+   TEST_EXCEPTION(boost::math::policies::raise_indeterminate_result_error(func, 0, val, T(12.34f), throw_policy), std::domain_error, format_message_string<T>("Error in function boost::math::test_function<float>(float, float, float): Indeterminate result with value { 1, 2, 3 }"));
    //
    // Now try user error handlers: these should all throw user_error():
    // - because by design these are undefined and must be defined by the user ;-)
@@ -309,7 +309,7 @@ void test_polynomial_error(T)
    BOOST_CHECK((boost::math::isnan)(boost::math::policies::raise_domain_error(func, msg1, T(0.0), ignore_policy)) || !std::numeric_limits<T>::has_quiet_NaN);
    BOOST_CHECK((boost::math::isnan)(boost::math::policies::raise_pole_error(func, msg1, T(0.0), ignore_policy)) || !std::numeric_limits<T>::has_quiet_NaN);
    BOOST_CHECK_EQUAL(boost::math::policies::raise_evaluation_error(func, msg1, T(1.25), ignore_policy), T(1.25));
-   BOOST_CHECK_EQUAL(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34), ignore_policy), T(12.34));
+   BOOST_CHECK_EQUAL(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34f), ignore_policy), T(12.34f));
 
    // Test with errno_on_error
    errno = 0;
@@ -322,7 +322,7 @@ void test_polynomial_error(T)
    BOOST_CHECK_EQUAL(boost::math::policies::raise_evaluation_error(func, msg1, T(1.25), errno_policy), T(1.25));
    BOOST_CHECK(errno == EDOM);
    errno = 0;
-   BOOST_CHECK(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34), errno_policy) == T(12.34));
+   BOOST_CHECK(boost::math::policies::raise_indeterminate_result_error(func, 0, T(0.0), T(12.34f), errno_policy) == T(12.34f));
    BOOST_CHECK_EQUAL(errno, EDOM);
 }
 

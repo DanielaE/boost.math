@@ -43,6 +43,7 @@
 # pragma warning (push)
 # pragma warning(disable:4127) // conditional expression is constant
 # pragma warning(disable:4389) // '==' : signed/unsigned mismatch in test_tools
+# pragma warning(disable:4702) // unreachable code
 #endif // _MSC_VER
 
 namespace boost { namespace math {

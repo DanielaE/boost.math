@@ -17,6 +17,11 @@
 
 #include <utility>
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost{ namespace math
 {
 namespace detail
@@ -335,6 +340,10 @@ inline RealType kurtosis_excess(const lognormal_distribution<RealType, Policy>& 
 // for this distribution have been defined, in order to
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_STATS_STUDENTS_T_HPP
 

@@ -36,7 +36,7 @@ void test_pi_multithreaded()
     };
 
     std::vector<std::pair<Real, Real>> bounds{{Real(0), Real(1)}, {Real(0), Real(1)}};
-    Real error_goal = 0.0002;
+    Real error_goal = static_cast<Real>(0.0002);
     naive_monte_carlo<Real, decltype(g)> mc(g, bounds, error_goal,
                                           /*singular =*/ false,/* threads = */ 2, /* seed = */ 18012);
     auto task = mc.integrate();
@@ -138,10 +138,10 @@ void test_cancel_and_restart()
 {
     std::cout << "Testing that cancellation and restarting works on naive Monte-Carlo integration on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     Real exact = boost::lexical_cast<Real>("1.3932039296856768591842462603255");
-    BOOST_CONSTEXPR const Real A = 1.0 / (pi<Real>() * pi<Real>() * pi<Real>());
+    BOOST_CONSTEXPR const Real A = 1.0f / (pi<Real>() * pi<Real>() * pi<Real>());
     auto g = [&](std::vector<Real> const & x)->Real
     {
-        return A / (1.0 - cos(x[0])*cos(x[1])*cos(x[2]));
+        return A / (1.0f - cos(x[0])*cos(x[1])*cos(x[2]));
     };
     vector<pair<Real, Real>> bounds{{ Real(0), pi<Real>()}, { Real(0), pi<Real>()}, { Real(0), pi<Real>()}};
     naive_monte_carlo<Real, decltype(g)> mc(g, bounds, (Real) 0.05, true, 1, 888889);
@@ -168,7 +168,7 @@ void test_finite_singular_boundary()
     {
         // The first term is singular at x = 0.
         // The second at x = 1:
-        return pow(log(1.0/x[0]), 2) + log1p(-x[0]);
+        return pow(log(1.0f/x[0]), 2) + log1p(-x[0]);
     };
     vector<pair<Real, Real>> bounds{{Real(0), Real(1)}};
     naive_monte_carlo<Real, decltype(g)> mc(g, bounds, (Real) 0.01, true, 1, 1922);
@@ -222,15 +222,15 @@ void test_product()
     auto g = [&](std::vector<Real> const & x)->Real
     {
         double y = 1;
-        for (uint64_t i = 0; i < x.size(); ++i)
+        for (std::size_t i = 0; i < x.size(); ++i)
         {
             y *= 2*x[i];
         }
-        return y;
+        return static_cast<Real>(y);
     };
 
     vector<pair<Real, Real>> bounds(dimension);
-    for (uint64_t i = 0; i < dimension; ++i)
+    for (std::size_t i = 0; i < dimension; ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(0, 1);
     }
@@ -240,7 +240,7 @@ void test_product()
     Real y = task.get();
     BOOST_CHECK_CLOSE_FRACTION(y, 1, 0.01);
     using std::pow;
-    Real exact_variance = pow(4.0/3.0, dimension) - 1;
+    Real exact_variance = static_cast<Real>(pow(4.0/3.0, dimension) - 1);
     BOOST_CHECK_CLOSE_FRACTION(mc.variance(), exact_variance, 0.1);
 }
 
@@ -251,15 +251,15 @@ void test_alternative_rng_1()
     auto g = [&](std::vector<Real> const & x)->Real
     {
         double y = 1;
-        for (uint64_t i = 0; i < x.size(); ++i)
+        for (std::size_t i = 0; i < x.size(); ++i)
         {
             y *= 2*x[i];
         }
-        return y;
+        return static_cast<Real>(y);
     };
 
     vector<pair<Real, Real>> bounds(dimension);
-    for (uint64_t i = 0; i < dimension; ++i)
+    for (std::size_t i = 0; i < dimension; ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(0, 1);
     }
@@ -271,7 +271,7 @@ void test_alternative_rng_1()
     Real y = task.get();
     BOOST_CHECK_CLOSE_FRACTION(y, 1, 0.01);
     using std::pow;
-    Real exact_variance = pow(4.0/3.0, dimension) - 1;
+    Real exact_variance = static_cast<Real>(pow(4.0/3.0, dimension) - 1);
     BOOST_CHECK_CLOSE_FRACTION(mc1.variance(), exact_variance, 0.05);
 
     std::cout << "Testing std::knuth_b" << std::endl;
@@ -294,15 +294,15 @@ void test_alternative_rng_2()
     auto g = [&](std::vector<Real> const & x)->Real
     {
         double y = 1;
-        for (uint64_t i = 0; i < x.size(); ++i)
+        for (std::size_t i = 0; i < x.size(); ++i)
         {
             y *= 2*x[i];
         }
-        return y;
+        return static_cast<Real>(y);
     };
 
     vector<pair<Real, Real>> bounds(dimension);
-    for (uint64_t i = 0; i < dimension; ++i)
+    for (std::size_t i = 0; i < dimension; ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(0, 1);
     }
@@ -333,11 +333,11 @@ void test_upper_bound_infinite()
     std::cout << "Testing that infinite upper bounds are integrated correctly by naive Monte-Carlo on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     auto g = [](std::vector<Real> const & x)->Real
     {
-        return 1.0/(x[0]*x[0] + 1.0);
+        return 1.0f/(x[0]*x[0] + 1.0f);
     };
 
     vector<pair<Real, Real>> bounds(1);
-    for (uint64_t i = 0; i < bounds.size(); ++i)
+    for (std::size_t i = 0; i < bounds.size(); ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(0, std::numeric_limits<Real>::infinity());
     }
@@ -353,11 +353,11 @@ void test_lower_bound_infinite()
     std::cout << "Testing that infinite lower bounds are integrated correctly by naive Monte-Carlo on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     auto g = [](std::vector<Real> const & x)->Real
     {
-        return 1.0/(x[0]*x[0] + 1.0);
+        return 1.0f/(x[0]*x[0] + 1.0f);
     };
 
     vector<pair<Real, Real>> bounds(1);
-    for (uint64_t i = 0; i < bounds.size(); ++i)
+    for (std::size_t i = 0; i < bounds.size(); ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(-std::numeric_limits<Real>::infinity(), 0);
     }
@@ -375,11 +375,11 @@ void test_lower_bound_infinite2()
     auto g = [](std::vector<Real> const & x)->Real
     {
         // If x[0] = inf, this should blow up:
-        return (x[0]*x[0])/(x[0]*x[0]*x[0]*x[0] + 1.0);
+        return (x[0]*x[0])/(x[0]*x[0]*x[0]*x[0] + 1.0f);
     };
 
     vector<pair<Real, Real>> bounds(1);
-    for (uint64_t i = 0; i < bounds.size(); ++i)
+    for (std::size_t i = 0; i < bounds.size(); ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(-std::numeric_limits<Real>::infinity(), 0);
     }
@@ -395,11 +395,11 @@ void test_double_infinite()
     std::cout << "Testing that double infinite bounds are integrated correctly by naive Monte-Carlo on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     auto g = [](std::vector<Real> const & x)->Real
     {
-        return 1.0/(x[0]*x[0] + 1.0);
+        return 1.0f/(x[0]*x[0] + 1.0f);
     };
 
     vector<pair<Real, Real>> bounds(1);
-    for (uint64_t i = 0; i < bounds.size(); ++i)
+    for (std::size_t i = 0; i < bounds.size(); ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(-std::numeric_limits<Real>::infinity(), std::numeric_limits<Real>::infinity());
     }
@@ -420,7 +420,7 @@ void test_radovic()
         using std::abs;
         Real alpha = (Real)0.01;
         Real z = 1;
-        for (uint64_t i = 0; i < dimension; ++i)
+        for (std::size_t i = 0; i < dimension; ++i)
         {
             z *= (abs(4*x[i]-2) + alpha)/(1+alpha);
         }
@@ -428,7 +428,7 @@ void test_radovic()
     };
 
     vector<pair<Real, Real>> bounds(dimension);
-    for (uint64_t i = 0; i < bounds.size(); ++i)
+    for (std::size_t i = 0; i < bounds.size(); ++i)
     {
         bounds[i] = std::make_pair<Real, Real>(0, 1);
     }

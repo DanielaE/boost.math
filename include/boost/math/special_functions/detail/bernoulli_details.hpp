@@ -14,6 +14,11 @@
 #include <boost/math/tools/toms748_solve.hpp>
 #include <vector>
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost{ namespace math{ namespace detail{
 //
 // Asymptotic expansion for B2n due to
@@ -661,5 +666,9 @@ inline bernoulli_numbers_cache<T, Policy>& get_bernoulli_numbers_cache()
 }
 
 }}}
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_BERNOULLI_DETAIL_HPP

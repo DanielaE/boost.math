@@ -17,6 +17,11 @@
 #include <boost/math/concepts/distributions.hpp>
 #include <boost/concept_archetype.hpp>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4244) // conversion from ... to ..., possible loss of data
+#endif
+
 #ifndef BOOST_MATH_INSTANTIATE_MINIMUM
 
 typedef boost::math::policies::policy<boost::math::policies::promote_float<false>, boost::math::policies::promote_double<false> > test_policy;
@@ -1414,5 +1419,8 @@ void instantiate_mixed(RealType)
 #endif
 }
 
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif // BOOST_LIBS_MATH_TEST_INSTANTIATE_HPP

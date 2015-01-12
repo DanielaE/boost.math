@@ -15,6 +15,11 @@
 #include <boost/math/constants/constants.hpp>
 #include <boost/math/special_functions/next.hpp>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4723) // potential divide by 0
+#endif
+
 namespace boost{ namespace math{ namespace quadrature { namespace detail{
 
 
@@ -701,5 +706,9 @@ void tanh_sinh_detail<Real, Policy>::prune_to_min_complement(const Real& m)
 }
 
 }}}}  // namespaces
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif

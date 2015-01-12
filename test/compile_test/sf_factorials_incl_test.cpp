@@ -39,6 +39,10 @@ void compile_and_link_test()
    check_result<long double>(boost::math::falling_factorial<long double>(l, u));
 #endif
 
+#ifdef BOOST_MSVC
+#pragma warning(disable: 4244) // conversion ... to 'const float', possible loss of data
+#endif
+
    //
    // Add constexpr tests here:
    //

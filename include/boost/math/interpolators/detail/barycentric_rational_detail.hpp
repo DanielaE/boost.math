@@ -94,7 +94,7 @@ barycentric_rational_imp<Real>::barycentric_rational_imp(InputIterator1 start_x,
                     continue;
                 }
 
-                Real diff = m_x[k] - m_x[j];
+                Real diff = m_x[static_cast<std::size_t>(k)] - m_x[static_cast<std::size_t>(j)];
                 if (abs(diff) < std::numeric_limits<Real>::epsilon())
                 {
                    std::string msg = std::string("Spacing between  x[")
@@ -108,11 +108,11 @@ barycentric_rational_imp<Real>::barycentric_rational_imp(InputIterator1 start_x,
             }
             if (i % 2 == 0)
             {
-                m_w[k] += 1/inv_product;
+                m_w[static_cast<std::size_t>(k)] += 1/inv_product;
             }
             else
             {
-                m_w[k] -= 1/inv_product;
+                m_w[static_cast<std::size_t>(k)] -= 1/inv_product;
             }
         }
     }

@@ -6,6 +6,10 @@
 // (See accompanying file LICENSE_1_0.txt
 // or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#ifdef _MSC_VER
+#  pragma warning(disable: 4244) // conversion from 'double' to 'float', possible loss of data
+#endif
+
 #include <boost/math/policies/policy.hpp>
 #include <boost/math/policies/error_handling.hpp>
 #include <boost/math/tools/precision.hpp>

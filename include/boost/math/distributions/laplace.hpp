@@ -27,6 +27,7 @@ namespace boost{ namespace math{
 #ifdef BOOST_MSVC
 #  pragma warning(push)
 #  pragma warning(disable:4127) // conditional expression is constant
+#  pragma warning(disable:4702) // unreachable code
 #endif
 
 template <class RealType = double, class Policy = policies::policy<> >

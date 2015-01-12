@@ -88,6 +88,7 @@ void check_close_fraction_l(long double v1, long double v2, long double tol, int
 
 void test_values_f(const char* name)
 {
+   (void)name;
 #ifndef TEST_LD
    //
    // First the C99 math functions:
@@ -410,6 +411,7 @@ void test_values_f(const char* name)
 
 void test_values(const char* name)
 {
+   (void)name;
 #ifndef TEST_LD
    //
    // First the C99 math functions:
@@ -731,6 +733,7 @@ void test_values(const char* name)
 
 void test_valuesl(const char* name)
 {
+   (void)name;
 #ifdef TEST_LD
 #ifndef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
    //
@@ -1054,6 +1057,8 @@ void test_valuesl(const char* name)
 
 int main(int argc, char* argv[])
 {
+   (void)argc;
+   (void)argv;
 #ifndef TEST_LD
    test_values_f("float");
    test_values("double");

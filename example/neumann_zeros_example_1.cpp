@@ -51,7 +51,7 @@ int main()
     std::cout << "cyl_neumann_zero(2., 1) = " << zn << std::endl;
 
     std::vector<float> nzeros(3); // Space for 3 zeros.
-    cyl_neumann_zero<float>(2.F, 1, nzeros.size(), nzeros.begin());
+    cyl_neumann_zero<float>(2.F, 1, static_cast<unsigned>(nzeros.size()), nzeros.begin());
 
     std::cout << "cyl_neumann_zero<float>(2.F, 1, ";
     // Print the zeros to the output stream.
