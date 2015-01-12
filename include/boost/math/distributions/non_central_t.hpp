@@ -10,6 +10,12 @@
 #ifndef BOOST_MATH_SPECIAL_NON_CENTRAL_T_HPP
 #define BOOST_MATH_SPECIAL_NON_CENTRAL_T_HPP
 
+#ifdef _MSC_VER
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4244) // narrowing conversion
+#endif
+
 #include <boost/math/distributions/fwd.hpp>
 #include <boost/math/distributions/non_central_beta.hpp> // for nc beta
 #include <boost/math/distributions/normal.hpp> // for normal CDF and quantile
@@ -1197,6 +1203,10 @@ namespace boost
 // for this distribution have been defined, in order to
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_NON_CENTRAL_T_HPP
 

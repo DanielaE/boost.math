@@ -48,6 +48,11 @@
 
 #include <utility>
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost
 {
   namespace math
@@ -520,6 +525,10 @@ namespace boost
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
 #include <boost/math/distributions/detail/inv_discrete_quantile.hpp>
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_POISSON_HPP
 

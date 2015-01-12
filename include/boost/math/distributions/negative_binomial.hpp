@@ -62,9 +62,7 @@
 
 #if defined (BOOST_MSVC)
 #  pragma warning(push)
-// This believed not now necessary, so commented out.
-//#  pragma warning(disable: 4702) // unreachable code.
-// in domain_error_imp in error_handling.
+#  pragma warning(disable: 4702) // unreachable code.
 #endif
 
 namespace boost

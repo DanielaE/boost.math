@@ -22,6 +22,5 @@ int main(int
    if(argc > 1000)
       instantiate(BOOST_FLOAT80_C(1.23));
 #endif
-   (void)argc;
 }
 

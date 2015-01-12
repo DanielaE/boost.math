@@ -8,6 +8,12 @@
 #ifndef BOOST_STATS_FIND_SCALE_HPP
 #define BOOST_STATS_FIND_SCALE_HPP
 
+#ifdef _MSC_VER
+#  pragma once
+#  pragma warning(push)
+#  pragma warning(disable: 4723) // potential divide by 0
+#endif
+
 #include <boost/math/distributions/fwd.hpp> // for all distribution signatures.
 #include <boost/math/distributions/complement.hpp>
 #include <boost/math/policies/policy.hpp>
@@ -207,5 +213,9 @@ namespace boost
 
   } // namespace boost
 } // namespace math
+
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_STATS_FIND_SCALE_HPP

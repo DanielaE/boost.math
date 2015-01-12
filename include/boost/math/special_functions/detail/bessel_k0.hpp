@@ -11,6 +11,8 @@
 #pragma once
 #pragma warning(push)
 #pragma warning(disable:4702) // Unreachable code (release mode only warning)
+#pragma warning(disable:4838) // conversion from 'double' to 'const value_type' requires a narrowing conversion
+#pragma warning(disable:4305) // 'initializing': truncation from 'double' to 'const value_type'
 #endif
 
 #include <boost/math/tools/rational.hpp>

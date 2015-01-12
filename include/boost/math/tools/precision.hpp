@@ -22,6 +22,11 @@
 #include <limits.h>
 #include <math.h>
 
+#if defined(BOOST_MSVC)
+#pragma warning(push)
+#pragma warning(disable: 4309) // 'static_cast': truncation of constant value
+#endif
+
 namespace boost{ namespace math
 {
 namespace tools
@@ -404,6 +409,10 @@ inline BOOST_MATH_CONSTEXPR T forth_root_epsilon() BOOST_NOEXCEPT_IF(BOOST_MATH_
 } // namespace tools
 } // namespace math
 } // namespace boost
+
+#if defined(BOOST_MSVC)
+#pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_TOOLS_PRECISION_INCLUDED
 

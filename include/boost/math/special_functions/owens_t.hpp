@@ -30,6 +30,7 @@
 #ifdef BOOST_MSVC
 #pragma warning(push)
 #pragma warning(disable:4127)
+#pragma warning(disable:4305) // truncation
 #endif
 
 namespace boost
