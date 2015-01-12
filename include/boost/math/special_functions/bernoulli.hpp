@@ -15,6 +15,11 @@
 #include <boost/math/special_functions/detail/unchecked_bernoulli.hpp>
 #include <boost/math/special_functions/detail/bernoulli_details.hpp>
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost { namespace math { 
    
 namespace detail {
@@ -139,5 +144,9 @@ inline OutputIterator tangent_t2n(const int start_index,
 }
 
 } } // namespace boost::math
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // _BOOST_BERNOULLI_B2N_2013_05_30_HPP_

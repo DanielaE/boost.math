@@ -49,7 +49,7 @@ void test_b3_spline()
     // Properties: B3 is an even function, B3' is an odd function.
     for (size_t i = 1; i < 200; ++i)
     {
-        Real arg = i*0.01;
+        Real arg = i*0.01f;
         BOOST_CHECK_CLOSE(boost::math::detail::b3_spline<Real>(arg), boost::math::detail::b3_spline<Real>(arg), eps);
         BOOST_CHECK_CLOSE(boost::math::detail::b3_spline_prime<Real>(-arg), -boost::math::detail::b3_spline_prime<Real>(arg), eps);
     }
@@ -72,7 +72,7 @@ void test_interpolation_condition()
         v[i] = dis(gen);
     }
 
-    Real step = 0.01;
+    Real step = 0.01f;
     Real a = 5;
     boost::math::cubic_b_spline<Real> spline(v.data(), v.size(), a, step);
 
@@ -92,22 +92,22 @@ void test_constant_function()
 {
     std::cout << "Testing that constants are interpolated correctly by cubic b splines on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     std::vector<Real> v(500);
-    Real constant = 50.2;
+    Real constant = 50.2f;
     for (size_t i = 0; i < v.size(); ++i)
     {
-        v[i] = 50.2;
+        v[i] = 50.2f;
     }
 
-    Real step = 0.02;
+    Real step = 0.02f;
     Real a = 5;
     boost::math::cubic_b_spline<Real> spline(v.data(), v.size(), a, step);
 
     for (size_t i = 0; i < v.size(); ++i)
     {
         // Do not test at interpolation point; we already know it works there:
-        Real y = spline(i*step + a + 0.001);
+        Real y = spline(i*step + a + 0.001f);
         BOOST_CHECK_CLOSE(y, constant, 10*std::numeric_limits<Real>::epsilon());
-        Real y_prime = spline.prime(i*step + a + 0.002);
+        Real y_prime = spline.prime(i*step + a + 0.002f);
         BOOST_CHECK_SMALL(y_prime, 5000*std::numeric_limits<Real>::epsilon());
     }
 
@@ -116,9 +116,9 @@ void test_constant_function()
 
     for (size_t i = 0; i < v.size(); ++i)
     {
-        Real y = spline(i*step + a + 0.002);
+        Real y = spline(i*step + a + 0.002f);
         BOOST_CHECK_CLOSE(y, constant, std::numeric_limits<Real>::epsilon());
-        Real y_prime = spline.prime(i*step + a + 0.002);
+        Real y_prime = spline.prime(i*step + a + 0.002f);
         BOOST_CHECK_SMALL(y_prime, std::numeric_limits<Real>::epsilon());
     }
 
@@ -130,9 +130,9 @@ void test_constant_function()
     for (size_t i = 0; i < v.size(); ++i)
     {
        // Do not test at interpolation point; we already know it works there:
-       Real y = spline2(i*step + a + 0.001);
+       Real y = spline2(i*step + a + 0.001f);
        BOOST_CHECK_CLOSE(y, constant, 10 * std::numeric_limits<Real>::epsilon());
-       Real y_prime = spline2.prime(i*step + a + 0.002);
+       Real y_prime = spline2.prime(i*step + a + 0.002f);
        BOOST_CHECK_SMALL(y_prime, 5000 * std::numeric_limits<Real>::epsilon());
     }
 
@@ -141,9 +141,9 @@ void test_constant_function()
 
     for (size_t i = 0; i < v.size(); ++i)
     {
-       Real y = spline2(i*step + a + 0.002);
+       Real y = spline2(i*step + a + 0.002f);
        BOOST_CHECK_CLOSE(y, constant, std::numeric_limits<Real>::epsilon());
-       Real y_prime = spline2.prime(i*step + a + 0.002);
+       Real y_prime = spline2.prime(i*step + a + 0.002f);
        BOOST_CHECK_SMALL(y_prime, std::numeric_limits<Real>::epsilon());
     }
 }
@@ -157,7 +157,7 @@ void test_affine_function()
     std::vector<Real> v(500);
     Real a = 10;
     Real b = 8;
-    Real step = 0.005;
+    Real step = 0.005f;
 
     auto f = [a, b](Real x) { return a*x + b; };
     for (size_t i = 0; i < v.size(); ++i)
@@ -169,7 +169,7 @@ void test_affine_function()
 
     for (size_t i = 0; i < v.size() - 1; ++i)
     {
-        Real arg = i*step + 0.0001;
+        Real arg = i*step + 0.0001f;
         Real y = spline(arg);
         BOOST_CHECK_CLOSE(y, f(arg), sqrt(std::numeric_limits<Real>::epsilon()));
         Real y_prime = spline.prime(arg);
@@ -181,7 +181,7 @@ void test_affine_function()
 
     for (size_t i = 0; i < v.size() - 1; ++i)
     {
-        Real arg = i*step + 0.0001;
+        Real arg = i*step + 0.0001f;
         Real y = spline(arg);
         BOOST_CHECK_CLOSE(y, f(arg), sqrt(std::numeric_limits<Real>::epsilon()));
         Real y_prime = spline.prime(arg);
@@ -196,10 +196,10 @@ void test_quadratic_function()
     using std::sqrt;
     std::cout << "Testing that quadratic functions are interpolated correctly by cubic b splines on type " << boost::typeindex::type_id<Real>().pretty_name() << "\n";
     std::vector<Real> v(500);
-    Real a = 1.2;
-    Real b = -3.4;
-    Real c = -8.6;
-    Real step = 0.01;
+    Real a = 1.2f;
+    Real b = -3.4f;
+    Real c = -8.6f;
+    Real step = 0.01f;
 
     auto f = [a, b, c](Real x) { return a*x*x + b*x + c; };
     for (size_t i = 0; i < v.size(); ++i)
@@ -211,7 +211,7 @@ void test_quadratic_function()
 
     for (size_t i = 0; i < v.size() -1; ++i)
     {
-        Real arg = i*step + 0.001;
+        Real arg = i*step + 0.001f;
         Real y = spline(arg);
         BOOST_CHECK_CLOSE(y, f(arg), 0.1);
         Real y_prime = spline.prime(arg);

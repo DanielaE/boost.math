@@ -4,6 +4,11 @@
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 #include <boost/config.hpp>
+
+#if defined(BOOST_MSVC)
+#pragma warning(disable: 4244) // conversion from 'const double' to 'int', possible loss of data
+#endif
+
 #define BOOST_TEST_MAIN
 #include <boost/array.hpp>
 #include <boost/math/tools/polynomial.hpp>

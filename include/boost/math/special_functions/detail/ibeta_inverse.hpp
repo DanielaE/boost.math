@@ -16,6 +16,11 @@
 #include <boost/math/tools/roots.hpp>
 #include <boost/math/special_functions/detail/t_distribution_inv.hpp>
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost{ namespace math{ namespace detail{
 
 //
@@ -985,6 +990,10 @@ inline typename tools::promote_args<RT1, RT2, RT3>::type
 
 } // namespace math
 } // namespace boost
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_FUNCTIONS_IGAMMA_INVERSE_HPP
 

@@ -20,6 +20,11 @@
 #include <boost/math/tools/roots.hpp> // for root finding.
 #include <boost/math/tools/series.hpp>
 
+#ifdef BOOST_MSVC
+#  pragma warning(push)
+#  pragma warning(disable: 4702) // unreachable code
+#endif
+
 namespace boost
 {
    namespace math
@@ -924,6 +929,10 @@ namespace boost
 // for this distribution have been defined, in order to
 // keep compilers that support two-phase lookup happy.
 #include <boost/math/distributions/detail/derived_accessors.hpp>
+
+#ifdef BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #endif // BOOST_MATH_SPECIAL_NON_CENTRAL_BETA_HPP
 

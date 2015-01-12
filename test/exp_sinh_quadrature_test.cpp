@@ -459,7 +459,7 @@ void test_crc()
        BOOST_CHECK_CLOSE_FRACTION(Q, Q_expected, tol);
     }
     // and for p < 1:
-    for (Real p = -0.99; p < 0; p += 0.1) {
+    for (Real p = (Real)-0.99; p < 0; p += (Real)0.1) {
        auto f = [&](Real x)->Real
        {
           return x > 1000 * boost::math::tools::log_max_value<Real>() ? Real(0) : Real(exp(-p * log(-boost::math::expm1(-x)) - (1 + p) * x));

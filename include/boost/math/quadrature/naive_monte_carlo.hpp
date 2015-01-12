@@ -20,6 +20,11 @@
 #include <map>
 #include <boost/math/policies/error_handling.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4267) // conversion from 'size_t' to 'unsigned int', possible loss of data
+#endif
+
 namespace boost { namespace math { namespace quadrature {
 
 namespace detail {
@@ -423,4 +428,9 @@ private:
 };
 
 }}}
+
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+
 #endif

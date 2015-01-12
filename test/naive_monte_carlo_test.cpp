@@ -35,8 +35,9 @@ void test_pi_multithreaded()
     };
 
     std::vector<std::pair<Real, Real>> bounds{{Real(0), Real(1)}, {Real(0), Real(1)}};
-    naive_monte_carlo<Real, decltype(g)> mc(g, bounds, (Real) 0.0005,
-                                          /*singular =*/ false,/* threads = */ 2, /* seed = */ 17);
+    Real error_goal = static_cast<Real>(0.0002);
+    naive_monte_carlo<Real, decltype(g)> mc(g, bounds, error_goal,
+                                          /*singular =*/ false,/* threads = */ 2, /* seed = */ 18012);
     auto task = mc.integrate();
     Real pi_estimated = task.get();
     if (abs(pi_estimated - pi<Real>())/pi<Real>() > 0.005) {

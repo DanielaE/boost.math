@@ -9,6 +9,7 @@
 
 #ifdef _MSC_VER
 #  pragma warning (disable : 4189) //  'd' : local variable is initialized but not referenced
+#  pragma warning (disable : 4702) // unreachable code
 #endif
 
 #include <iostream>
