@@ -18,6 +18,7 @@
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4127 4146) //  conditional expression is constant
+#pragma warning(disable: 4723) // potential divide by 0.
 #endif
 
 const char* method_name(const boost::math::detail::native_tag&)
@@ -190,7 +191,7 @@ void test_classify(T t, const char* type)
       BOOST_CHECK_EQUAL((::boost::math::isnan)(-t), false);
       BOOST_CHECK_EQUAL((::boost::math::isnormal)(t), false);
       BOOST_CHECK_EQUAL((::boost::math::isnormal)(-t), false);
-      t = -2;
+      t = static_cast<T>(-2);
       t /= u;
       BOOST_CHECK_EQUAL((::boost::math::fpclassify)(t), (int)FP_INFINITE);
       BOOST_CHECK_EQUAL((::boost::math::fpclassify)(-t), (int)FP_INFINITE);

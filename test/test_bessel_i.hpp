@@ -3,6 +3,11 @@
 //  Boost Software License, Version 1.0. (See accompanying file
 //  LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#ifdef _MSC_VER
+#  pragma warning(push)
+#  pragma warning(disable: 4756) // overflow in constant arithmetic
+#endif
+
 #define BOOST_MATH_OVERFLOW_ERROR_POLICY ignore_error
 #include <boost/math/concepts/real_concept.hpp>
 #define BOOST_TEST_MAIN
@@ -178,3 +183,6 @@ void test_bessel(T, const char* name)
       do_test_cyl_bessel_i<T>(iv_large_data, name, "Bessel Iv: Mathworld Data (large values)");
 }
 
+#ifdef _MSC_VER
+#  pragma warning(pop)
+#endif
