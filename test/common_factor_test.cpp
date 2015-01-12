@@ -68,7 +68,7 @@ public:
     self_type  operator ~() const  { return self_type( ~this->v_ ); }
     self_type  operator !() const  { return self_type( !this->v_ ); }
     self_type  operator +() const  { return self_type( +this->v_ ); }
-    self_type  operator -() const  { return self_type( -this->v_ ); }
+    self_type  operator -() const  { return self_type( 0-this->v_ ); }
 
     bool  operator  <( self_type const &r ) const  { return this->v_ < r.v_; }
     bool  operator ==( self_type const &r ) const  { return this->v_ == r.v_; }
