@@ -17,6 +17,9 @@
 #define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 
+#ifdef BOOST_MSVC
+#pragma warning(disable:4723) // potential divide by 0
+#endif
 
 BOOST_TEST_CASE_TEMPLATE_FUNCTION(sinc_pi_test, T)
 {
